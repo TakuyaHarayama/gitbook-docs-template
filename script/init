@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+echo "Initializing gitbook docs ..."
+
+npm install
+rm -fr .git
+npm run serve

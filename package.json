@@ -1,0 +1,26 @@
+{
+  "name": "gitbook-docs-template",
+  "version": "1.1.0",
+  "description": "Gitbookで作成するマークダウンドキュメントのテンプレートです。",
+  "main": "index.js",
+  "config": {},
+  "scripts": {
+    "init": "$(npm bin)/gitbook init",
+    "install": "$(npm bin)/gitbook install",
+    "serve": "$(npm bin)/gitbook serve",
+    "build": "$(npm bin)/gitbook build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "TakuyaHarayama",
+  "license": "MIT",
+  "dependencies": {
+    "gitbook-cli": "^2.3.0",
+    "gitbook-plugin-expandable-chapters": "^0.2.0",
+    "gitbook-plugin-graph": "^0.1.0",
+    "gitbook-plugin-include-csv": "^0.3.0",
+    "gitbook-plugin-mermaid-gb3": "^2.1.0",
+    "gitbook-plugin-theme-api": "^1.1.2",
+    "gitbook-plugin-toc": "0.0.2",
+    "gitbook-plugin-uml": "^1.0.0"
+  }
+}
