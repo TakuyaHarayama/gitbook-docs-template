@@ -36,7 +36,8 @@ jobs:
           command: |
             sudo apt-get install graphviz
             sudo apt-get install default-jre
-            npm install
+            sudo npm update -g npm
+            sudo npm install
 
       - save_cache:
           paths:
@@ -45,11 +46,11 @@ jobs:
 
       - run:
           name: Run Textlinter
-          command: npm run lint
+          command: sudo npm run lint
 
       - run:
           name: Create HTML from markdown via gitbook
-          command: npm run build
+          command: sudo npm run build
 
       - persist_to_workspace:
           root: *workspace_root
