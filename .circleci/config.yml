@@ -1,0 +1,86 @@
+version: 2
+
+workspace_root: &workspace_root
+    ~/gitbook-docs-template
+
+defaults: &defaults
+  docker:
+    - image: circleci/node:8
+  working_directory: *workspace_root
+
+attach_workspace: &attach_workspace
+  attach_workspace:
+    at: *workspace_root
+
+jobs:
+  docs:
+    <<: *defaults
+    steps:
+      - checkout
+
+      - run:
+          name: System information
+          command: |
+            echo "Node $(node -v)"
+            echo "Yarn v$(yarn --version)"
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+
+      - run:
+          name: Install dependencies
+          command: |
+            sudo apt-get install graphviz
+            sudo apt-get install default-jre
+            npm install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+
+      - run:
+          name: Run Textlinter
+          command: npm run lint
+
+      - run:
+          name: Create HTML from markdown via gitbook
+          command: npm run build
+
+      - persist_to_workspace:
+          root: *workspace_root
+          paths:
+            - _book
+
+  deploy_s3:
+    <<: *defaults
+    steps:
+      - <<: *attach_workspace
+
+      - run:
+          name: No deploy
+          command: echo No deploy
+
+      # - run:
+      #     name: Install dependencies
+      #     command: sudo apt-get -y -qq install awscli
+
+      # - run:
+      #     name: Deploy to S3 if tests pass and branch is Master
+      #     command: aws s3 sync _book s3://gitbook-docs-template --delete
+
+workflows:
+  version: 2
+  workflows:
+    jobs:
+      - docs
+      - deploy_s3:
+          requires:
+            - docs
+          filters:
+            branches:
+              only: master

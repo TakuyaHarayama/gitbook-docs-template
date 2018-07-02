@@ -1,5 +1,7 @@
 # Gitbook docs template
 
+[![CircleCI](https://circleci.com/gh/TakuyaHarayama/gitbook-docs-template.svg?style=svg&circle-token=e6b31cf4ee82b16f0aab8d7302ea2c349563d15b)](https://circleci.com/gh/TakuyaHarayama/gitbook-docs-template)
+
 <!-- toc -->
 
 
@@ -28,8 +30,7 @@ Following plugins is installed.
 Default `docs` to your book's name. and run it.
 
 ```bash
-cd YOUR_PROJECT_FOLDER
-export PJNAME=docs && git clone --depth 1 https://github.com/TakuyaHarayama/gitbook-docs-template.git docs && cd docs && script/init
+export PJNAME=docs && git clone --depth 1 https://github.com/TakuyaHarayama/gitbook-docs-template.git docs && cd docs && npm install && rm -fr .git && npm run serve
 ```
 
 open [http://localhost:4000](http://localhost:4000)
@@ -190,6 +191,15 @@ EOF
     limit=6 %}
 {% endincludeCsv %}
 
+## Linter
+
+```bash
+$ npm run -s lint
+```
+
+```bash
+$ npm run -s lintfix
+```
 
 ## Deploy to S3
 

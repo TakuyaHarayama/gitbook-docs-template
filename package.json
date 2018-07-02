@@ -9,7 +9,9 @@
     "install": "$(npm bin)/gitbook install",
     "serve": "$(npm bin)/gitbook serve",
     "build": "$(npm bin)/gitbook build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "textlint ./**/*.md",
+    "lintfix": "textlint --fix ./**/*.md"
   },
   "author": "TakuyaHarayama",
   "license": "MIT",
@@ -21,6 +23,9 @@
     "gitbook-plugin-mermaid-gb3": "^2.1.0",
     "gitbook-plugin-theme-api": "^1.1.2",
     "gitbook-plugin-toc": "0.0.2",
-    "gitbook-plugin-uml": "^1.0.0"
+    "gitbook-plugin-uml": "^1.0.0",
+    "textlint": "^10.2.1",
+    "textlint-rule-preset-ja-technical-writing": "^2.0.0",
+    "textlint-rule-spellcheck-tech-word": "^5.0.0"
   }
 }
